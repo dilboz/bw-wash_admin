@@ -1,0 +1,43 @@
+.navbutton {
+  display: inline-block;
+  padding: 15px 16px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  letter-spacing: 0.05rem;
+  display: flex;
+  align-items: center;
+  background: $white;
+  font-weight: 600;
+  border: 1px solid $white;
+  transition: border-color 300ms linear, color 300ms linear;
+
+  &:hover {
+    color: $main;
+    transition: border-color 300ms linear, color 80ms linear;
+  }
+
+  &:active {
+    color: $main;
+    border-color: $main-light-1;
+    transition: all 80ms linear;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    transition: 80ms linear;
+  }
+
+  &_active {
+    border-color: $main;
+    color: $white;
+    background: $main;
+    pointer-events: none;
+
+    .navbutton__icon {
+      color: $white;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+$header-height: 50px;
+$navigation-width: 250px;
+
+@mixin fadeIn {
+  animation: fadeIn 100ms linear;
+}
+
+@mixin fadeInCenter {
+  animation: fadeInCenter 100ms linear;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInCenter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) translateX(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+  }
+}

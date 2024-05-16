@@ -1,0 +1,39 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// make switch look like a button with input.input div.slider
+.root {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60px;
+  height: 34px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 34px;
+  background-color: rgb(238, 238, 238);
+  transition: all 0.3s ease;
+  padding: 3px;
+}
+
+.active {
+  background-color: rgb(224, 63, 63);
+}
+
+.ball {
+  border-radius: 50%;
+  background-color: rgb(192, 192, 192);
+  width: 30px;
+  height: 30px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  &Active {
+    background-color: #fff;
+    transform: translateX(85%);
+  }
+}

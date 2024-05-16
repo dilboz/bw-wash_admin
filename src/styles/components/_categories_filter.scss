@@ -1,0 +1,48 @@
+.categories-filter {
+  &__title {
+    border: 2px solid $blue;
+    color: $blue;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+
+    .active {
+      background-color: $blue;
+      color: #fff;
+      &:first-child {
+        background-color: #ddd;
+        color: $blue;
+        font-weight: bold;
+        border: 2px solid $blue;
+      }
+    }
+  }
+  &__item {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease-in-out;
+    margin-left: 0;
+    cursor: pointer;
+
+    &:first-child {
+      background-color: #ddd;
+    }
+
+    input {
+      display: none;
+    }
+
+    &:hover {
+      border-color: $blue;
+    }
+  }
+}

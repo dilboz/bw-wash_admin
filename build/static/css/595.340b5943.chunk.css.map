@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/595.340b5943.chunk.css","mappings":"AAAA,MACE,wBACF,CAEA,SACE,eACF,CAEA,kBAGE,qBAAsB,CADtB,WAEF","sources":["views/pages/order/index.css"],"sourcesContent":["table {\n  border-collapse: collapse;\n}\n\ntable th {\n  text-align: left;\n}\n\ntable td,\ntable th {\n  padding: 6px;\n  border: 1px solid #000;\n}\n"],"names":[],"sourceRoot":""}

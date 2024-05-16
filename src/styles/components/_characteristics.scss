@@ -1,0 +1,53 @@
+.characteristics-form {
+  margin-bottom: 250px;
+}
+
+.characteristics-list__label {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.characteristics-list__button {
+  height: 42px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid rgba($grey, 0.2);
+  color: $red;
+  transition: 100ms linear;
+  &:hover {
+    border-color: $red;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.characteristic-value {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.characteristic-value__name {
+  flex-grow: 1;
+}
+
+.characteristic-edit,
+.characteristic-delete {
+  font-size: 1rem;
+}
+
+.characteristic-edit {
+  color: $main;
+}
+
+.characteristic-delete {
+  color: $red;
+}
+
+.characteristic-values {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

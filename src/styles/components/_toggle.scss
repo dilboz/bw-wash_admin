@@ -1,0 +1,52 @@
+$size: 28px;
+$width: 52px;
+$height: 23px;
+
+.toggle-button {
+  width: $width;
+  position: relative;
+  border-radius: 50px;
+  height: $height;
+  background: #d2d2d2;
+  display: flex;
+}
+
+.toggle-button__filled-bar-wrap {
+  position: absolute;
+  border-radius: 50px;
+  overflow: hidden;
+  width: $width;
+  height: $height;
+}
+
+.toggle-button__filled-bar {
+  border-radius: 50px;
+  position: absolute;
+  right: 100%;
+  width: $width;
+  height: 100%;
+  background: $main;
+  transition: 0.1s linear;
+}
+
+.toggle-button__thumb {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background: #f6f6f6;
+  border-radius: 50px;
+  width: $size;
+  height: $size;
+  border: 1px solid #dedede;
+  transition: 0.1s linear;
+}
+
+.toggle-button_active {
+  .toggle-button__thumb {
+    left: $width - $size;
+  }
+  .toggle-button__filled-bar {
+    right: 0;
+  }
+}

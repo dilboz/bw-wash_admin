@@ -1,0 +1,11 @@
+.mainLayout {
+  position: relative;
+  padding-top: $header-height;
+}
+
+.mainLayout__content {
+  position: relative;
+  width: calc(100% - $navigation-width - 50px);
+  margin-left: calc($navigation-width + 50px);
+  margin-top: 30px;
+}

@@ -1,0 +1,93 @@
+.banner__list {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding-bottom: 50px;
+}
+
+.banner__item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.banner__item-name {
+  font-size: 1.125rem;
+  letter-spacing: 0.03rem;
+  color: $dark-1;
+  font-weight: 600;
+}
+
+.banner__item-description {
+  font-size: 0.875rem;
+  color: $dark-1;
+  letter-spacing: 0.03rem;
+}
+
+.banner__container {
+  display: flex;
+  gap: 10px;
+}
+
+.banner__image {
+  height: auto;
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.banner__image_sm {
+  img {
+    object-fit: contain;
+  }
+}
+
+.banner__image_xs {
+  width: 150px;
+}
+
+.banner__btn {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: 100ms linear;
+}
+
+.banner__tools {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.banner__delete-btn {
+  background: $white;
+  color: $red;
+  &:hover {
+    border-color: rgba($red, 0.5);
+  }
+  &:focus,
+  &:active {
+    background: $white;
+    color: $red;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.banner__edit-btn {
+  background: $white;
+  color: $main;
+  &:hover {
+    border-color: rgba($main, 0.5);
+  }
+  &:focus,
+  &:active {
+    background: $white;
+    color: $main;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}

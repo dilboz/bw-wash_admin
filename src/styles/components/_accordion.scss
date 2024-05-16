@@ -1,0 +1,25 @@
+.accordion {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.accordion__menu {
+  height: 0;
+  overflow: hidden;
+  transition: 100ms linear;
+  border-radius: 6px;
+}
+
+.accordion__menu-wrap {
+  margin-top: 20px;
+  background: $white;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.accordion_open {
+  .deliveryType__item-arrow {
+    transform: rotateZ(180deg);
+  }
+}

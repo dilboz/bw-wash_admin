@@ -1,0 +1,39 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination__item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  line-height: 19px;
+  padding: 10px 0;
+  border-radius: 4px;
+  color: $dark-1;
+  background: $white;
+  border: 1px solid $white;
+  transition: all 100ms linear, border 300ms linear;
+  &:hover {
+    color: $main;
+  }
+  &:active {
+    border-color: $main-light-1;
+    transition: all 100ms linear;
+  }
+}
+
+.pagination__item--active {
+  background: $main;
+  color: $white;
+  border: 1px solid $main;
+  pointer-events: none;
+  &:hover,
+  &:active,
+  &:focus {
+    color: $white;
+  }
+}

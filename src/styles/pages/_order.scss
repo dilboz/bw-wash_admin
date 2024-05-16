@@ -1,0 +1,64 @@
+@import '../config/colors';
+@import '../config/vars';
+
+.order {
+	background: #fff;
+	max-width: 700px;
+	margin: 0 auto;
+	padding: 30px;
+	border-radius: 6px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.order__item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.order__title {
+	font-size: 1.125rem;
+}
+
+.order__value {
+	font-weight: 600;
+	&--new {
+		color: #5aa2ff;
+	}
+	&--rejected {
+		color: #ff5a5a;
+	}
+	&--approved {
+		color: #3dd13d;
+	}
+}
+
+.order__text {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.order__products {
+	display: flex;
+	flex-direction: column;
+	border-bottom: 1px solid $grey;
+}
+
+.order__product {
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr 1fr;
+	border: 1px solid $grey;
+	border-bottom: none;
+	border-right: none;
+}
+
+.order__product-col {
+	padding: 10px;
+	border-right: 1px solid $grey;
+	&--h {
+		font-weight: 600;
+	}
+}

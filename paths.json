@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@styles/*": ["./styles/*"],
+      "@pages": ["./views/pages"],
+      "@components": ["./views/components"],
+      "@layouts": ["./views/layouts"],
+      "@icons": ["./views/icons"],
+      "@skeletons": ["./views/skeletons"],
+      "@routes": ["./routes"],
+      "@validations": ["./common/validations"],
+      "@constants": ["./common/constants"],
+      "@services": ["./common/services"],
+      "@functions": ["./common/functions"],
+      "@controllers": ["./common/controllers"],
+      "@utils/*": ["./common/utils/*"],
+      "@interfaces": ["./common/interfaces"],
+      "@store": ["./common/store"],
+      "@store/*": ["./common/store/*"]
+    }
+  }
+}

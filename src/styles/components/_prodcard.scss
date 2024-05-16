@@ -1,0 +1,91 @@
+.prodcard {
+  border-radius: 6px;
+  width: 450px;
+  height: 200px;
+  border: 1px solid $main-light-0;
+  padding: 20px;
+  background: $white;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  &:hover {
+    .prodcard__buttons {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}
+
+.prodcard__img-wrap {
+  border-radius: 4px;
+  width: 180px;
+  height: auto;
+  overflow: hidden;
+  align-self: stretch;
+}
+
+.prodcard__img {
+  height: 100%;
+  span {
+    width: 100%;
+    height: 100%;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// .prodcard__info {
+
+// }
+
+.prodcard__title {
+  margin-bottom: 10px;
+}
+
+.prodcard__name {
+  margin-bottom: 3px;
+  letter-spacing: 0.05rem;
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: $dark-1;
+}
+
+.prodcard__subtitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prodcard__is-new {
+  font-size: 0.875rem;
+  letter-spacing: 0.05rem;
+  color: $blue;
+}
+
+.prodcard__discount {
+  font-size: 0.875rem;
+  letter-spacing: 0.05rem;
+  color: $orange;
+}
+
+.prodcard__price {
+  font-size: 1.125rem;
+  letter-spacing: 0.05rem;
+  color: $dark-1;
+}
+
+.prodcard__buttons {
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  margin-top: 10px;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.prodcard__button {
+  font-size: 0.875rem;
+}
