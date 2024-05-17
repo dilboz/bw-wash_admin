@@ -80,8 +80,8 @@ export const routeConfig = [
     path: Paths.addDeliveryType,
     index: true,
     element: React.lazy(() =>
-      import("@pages").then(({ AddDeliveryType }) => ({
-        default: AddDeliveryType,
+      import("@pages").then(({ DeliveryType }) => ({
+        default: DeliveryType,
       }))
     ),
   },

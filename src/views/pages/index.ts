@@ -23,7 +23,7 @@ export * from "./addProduct";
 export * from "./addCharacteristics";
 export * from "./addCharacteristicValue";
 export * from "./addBrand";
-export * from "./addDeliveryType";
+export * from "./deliveryType";
 export * from "./addCategory";
 export * from "./addBanner";
 export * from "./addPaymentType";

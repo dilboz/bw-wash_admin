@@ -56,6 +56,29 @@ export const ProductsFilter: React.FC<IProps> = ({ onChange }): JSX.Element => {
     axios.get(BaseUrl + "/product/dowloandexceldocument?id=" + checkedId);
   };
 
+  function flattenCategories(categories: ICategory[]): ICategory[] {
+    const flattenedCategories: ICategory[] = [];
+  
+    function flatten(category: ICategory) {
+      flattenedCategories.push(category);
+      if (category.subCategories && category.subCategories.length > 0) {
+        category.subCategories.forEach(subCategory => {
+          flatten(subCategory);
+        });
+      }
+    }
+  
+    categories.forEach(category => {
+      flatten(category);
+    });
+  
+    return flattenedCategories;
+  }
+
+
+  const flattedCategories = flattenCategories(categoriesState);
+
+  
   return (
     <div className="categories-filter">
       <h3 className="categories-filter__title">Категории</h3>
@@ -67,7 +90,7 @@ export const ProductsFilter: React.FC<IProps> = ({ onChange }): JSX.Element => {
         >
           Все
         </div>
-        {categoriesState.map((category: any) => {
+        {flattedCategories?.map((category: any) => {
           return (
             <div
               className={`categories-filter__item ${
