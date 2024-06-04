@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Page } from "@components";
 import { MainLayout } from "@layouts";
 import { useAppDispatch, useAppSelector } from "@store";
 import { bannerControllers } from "@controllers";
 import { AppPaths } from "@constants";
 import classNames from "classnames";
+
+// @ts-ignore
+import { ReactPhotoEditor } from "react-photo-editor";
+import "react-photo-editor/dist/style.css";
 
 export const AddBanner: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -13,8 +17,20 @@ export const AddBanner: React.FC = (): JSX.Element => {
   const [src, setSrc] = React.useState<string>("");
   const [file, setFile] = React.useState<File | null>(null);
 
+  const [showModal, setShowModal] = useState(false)
+
+
+  const hideModal = () => {
+    setShowModal(false)
+  }
+
+  const handleSaveImage = (editedFile: File) => {
+    setFile(editedFile);
+  };
+
   const handleSelectImg = React.useCallback((files: FileList | null) => {
     if (!files) return;
+    setShowModal(true);
     setFile(files[0]);
   }, []);
 
@@ -82,6 +98,14 @@ export const AddBanner: React.FC = (): JSX.Element => {
             </Link>
           </div>
         </div>
+        {file && (
+          <ReactPhotoEditor
+            open={showModal}
+            onClose={hideModal}
+            file={file}
+            onSaveImage={handleSaveImage}
+          />
+        )}
       </MainLayout>
     </Page>
   );
