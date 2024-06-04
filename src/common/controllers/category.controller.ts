@@ -50,6 +50,28 @@ export const getPopularCategoryController =
     }
   };
 
+  export const updateCategoryController =
+  (category: {id: number, visibility: boolean}) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(actions.setAppFreezed(true));
+      dispatch(actions.categoryStartPending());
+
+      const response = await categoryServices.update(category);
+      
+      if (response.status === 204) history.push(AppPaths.categories);
+    } catch (error: any) {
+      if (error.response) {
+        dispatch(actions.categorySetError(error.response.data.message));
+      }
+    } finally {
+      dispatch(actions.setAppFreezed(false));
+      setTimeout(() => {
+        dispatch(actions.categoryStopPending());
+      }, 500);
+    }
+  };
+
+
 export const createCategoryController =
   (category: FormData) => async (dispatch: AppDispatch) => {
     try {
@@ -123,5 +145,6 @@ export const categoryControllers = Object.freeze(
     edit: editCategoryController,
     delete: deleteCategoryController,
     getPopular: getPopularCategoryController,
+    updateCategorystatus: updateCategoryController
   })
 );

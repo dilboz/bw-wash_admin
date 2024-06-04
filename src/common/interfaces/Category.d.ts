@@ -1,4 +1,5 @@
 export interface ICategory {
+  isActive?: boolean;
   id: string;
   iconPath: string;
   imagePath: string;

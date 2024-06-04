@@ -21,7 +21,7 @@ export const ProductsFilter: React.FC<IProps> = ({ onChange }): JSX.Element => {
 
   const getCategories = async () => {
     const response = await axios.get(
-      process.env.REACT_APP_BASE_URL + "/categories"
+      process.env.REACT_APP_BASE_URL + "/categories/admin"
     );
 
     const categories = response.data;

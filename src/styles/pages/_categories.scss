@@ -90,3 +90,17 @@
     color: $main;
   }
 }
+
+.category-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.specategory {
+  display: flex;
+  align-items: baseline;
+}
+
+.pointer {
+  cursor: pointer;
+}

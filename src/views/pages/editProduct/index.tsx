@@ -261,7 +261,7 @@ export const EditProduct: React.FC = (): JSX.Element => {
               <div className="banner__container mt-1">
                 <div className="banner__image">
                   <img
-                    className="img"
+                    className="img main-product-image"
                     src={mainImage.image}
                     alt="Выбранное изображение"
                   />
@@ -292,12 +292,12 @@ export const EditProduct: React.FC = (): JSX.Element => {
           <div className="form__label">
             <div className="form__label-name">Дополнительные фотографии</div>
 
-            <div className="d-flex direction-column gap-20 mt-1 mb-1">
+            <div className="d-flex flex-wrap gap-20 mt-1 mb-1">
               {imageList.map((item) => (
                 <div className="banner__container mt-1" key={item.id}>
                   <div className="banner__image ">
                     <img
-                      className="img"
+                      className="img product-images"
                       src={item.image}
                       alt="Выбранное изображение"
                     />

@@ -3,10 +3,11 @@ import {
   requestGET,
   requestPOST,
   requestPUT,
+  requestUpdate,
 } from "@utils/axios";
 import { Api } from "@constants";
 
-const getCategorysService = () => requestGET(Api.categories);
+const getCategorysService = () => requestGET(Api.categories + "/admin");
 
 const getPopularCategorysService = () => requestGET(Api.popularCategories);
 
@@ -18,6 +19,9 @@ const editCategoryService = (body: FormData, id: string) =>
 
 const deleteCategoryService = (id: string) => requestDELETE(Api.categories, id);
 
+const updateCategoryStatus = ({ id, visibility }: any) =>
+  requestUpdate(Api.categories + "/" + id + "/status/" + visibility);
+
 export const categoryServices = Object.freeze(
   Object.seal({
     get: getCategorysService,
@@ -25,5 +29,6 @@ export const categoryServices = Object.freeze(
     create: createCategoryService,
     edit: editCategoryService,
     delete: deleteCategoryService,
+    update: updateCategoryStatus
   })
 );

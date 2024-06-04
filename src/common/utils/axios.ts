@@ -54,7 +54,7 @@ instance.interceptors.response.use(
           history.push(Paths.connectionError);
         } else {
           toast.error("Ошибка подключения к серверу");
-        } 
+        }
     }
     return Promise.reject(error);
   }
@@ -68,7 +68,9 @@ const requestPOST = (url: string, body?: any) => instance.post(url, body);
 const requestPUT = (url: string, body?: any, id?: string) =>
   instance.put(url + "/" + id, body);
 
+const requestUpdate = (url: string, body?: any) => instance.patch(url, body);
+
 const requestDELETE = (url: string, id?: string) =>
   instance.delete(url + "/" + id);
 
-export { requestGET, requestPOST, requestPUT, requestDELETE };
+export { requestGET, requestPOST, requestPUT, requestDELETE, requestUpdate };

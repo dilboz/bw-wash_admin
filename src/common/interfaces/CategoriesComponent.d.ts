@@ -1,6 +1,7 @@
 export interface ICategories {
   id: string | null;
   name: string;
+  isActive?: boolean
 }
 
 export interface ICategoriesAll extends ICategories {

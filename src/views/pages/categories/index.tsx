@@ -36,7 +36,7 @@ export const Categories: React.FC = (): JSX.Element => {
           {!pending && (
             <>
               <CategoriesRoot
-                list={data.map((i) => ({ id: i.id, name: i.name }))}
+                list={data.map((i) => ({ id: i.id, name: i.name, isActive: i.isActive }))}
                 activeId={activeId}
                 onSetActive={setActiveId}
               />

@@ -131,7 +131,7 @@ export const AddProduct: React.FC = (): JSX.Element => {
               <div className="banner__container mt-1">
                 <div className="banner__image">
                   <img
-                    className="img"
+                    className="img main-product-image"
                     src={URL.createObjectURL(mainImage)}
                     alt="Выбранное изображение"
                   />
@@ -162,12 +162,12 @@ export const AddProduct: React.FC = (): JSX.Element => {
           <div className="form__label">
             <div className="form__label-name">Дополнительные фотографии</div>
 
-            <div className="d-flex direction-column gap-20 mt-1 mb-1">
+            <div className="d-flex gap-20 mt-1 mb-1 flex-wrap">
               {imageList.map((item) => (
                 <div className="banner__container mt-1" key={item.id}>
                   <div className="banner__image ">
                     <img
-                      className="img"
+                      className="img product-images"
                       src={URL.createObjectURL(item.file)}
                       alt="Выбранное изображение"
                     />

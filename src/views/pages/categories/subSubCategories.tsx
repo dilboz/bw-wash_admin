@@ -4,6 +4,7 @@ import { KeyboardArrowDownIcon } from "@icons";
 import classNames from "classnames";
 import { Link } from "@components";
 import { Paths } from "@constants";
+import { categoryServices } from "@services";
 
 interface IProps {
   id: string | null;
@@ -27,13 +28,25 @@ const SubSubCategories: React.FC<IProps> = (props): JSX.Element => {
         {props.list
           .slice(0, showMore ? props.list.length : 5)
           .map((subsubcat) => (
-            <Link
-              to={Paths.editCategory + "/" + subsubcat.id}
-              className="subsubcategories__item"
-              key={subsubcat.id}
-            >
-              {subsubcat.name}
-            </Link>
+            <div className="category-box" key={subsubcat.id}>
+              <Link
+                to={Paths.editCategory + "/" + subsubcat.id}
+                className="subsubcategories__item"
+              >
+                {subsubcat.name}
+              </Link>
+              <input
+                type="checkbox"
+                defaultChecked={subsubcat?.isActive}
+                className="pointer"
+                onClick={(e) =>
+                  categoryServices.update({
+                    id: subsubcat?.id,
+                    visibility: e.currentTarget.checked,
+                  })
+                }
+              />
+            </div>
           ))}
       </div>
       {props.list.length > 5 && (
