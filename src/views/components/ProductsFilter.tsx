@@ -4,9 +4,8 @@ import axios from "axios";
 import { ICategory } from "@interfaces";
 import { useAppDispatch } from "@store";
 import { setStatuses } from "@store/slice";
-import { useDispatch } from "react-redux";
-import { Switch } from "./Switch";
 import { BaseUrl } from "@utils/BaseUrl";
+import Dropdown from "./dropdown";
 
 interface IProps {
   onChange: (value: string) => void;
@@ -43,8 +42,7 @@ export const ProductsFilter: React.FC<IProps> = ({ onChange }): JSX.Element => {
     getCategories();
   }, []);
 
-  const handleItemClick = (e: any) => {
-    const id = e.target.getAttribute("data-id");
+  const handleItemClick = (id: any) => {
     setCheckedId(id);
   };
 
@@ -56,54 +54,42 @@ export const ProductsFilter: React.FC<IProps> = ({ onChange }): JSX.Element => {
     axios.get(BaseUrl + "/product/dowloandexceldocument?id=" + checkedId);
   };
 
-  function flattenCategories(categories: ICategory[]): ICategory[] {
-    const flattenedCategories: ICategory[] = [];
-  
-    function flatten(category: ICategory) {
-      flattenedCategories.push(category);
-      if (category.subCategories && category.subCategories.length > 0) {
-        category.subCategories.forEach(subCategory => {
-          flatten(subCategory);
-        });
-      }
-    }
-  
-    categories.forEach(category => {
-      flatten(category);
-    });
-  
-    return flattenedCategories;
-  }
-
-
-  const flattedCategories = flattenCategories(categoriesState);
-
-  
   return (
     <div className="categories-filter">
       <h3 className="categories-filter__title">Категории</h3>
-      <div className="categories-filter__list">
+      <br />
+      <div
+        style={{
+          display: "flex",
+          flexShrink: "1",
+          flexWrap: "wrap",
+          gap: "20px",
+        }}
+      >
         <div
-          className={`categories-filter__item ${!checkedId ? "active" : ""}`}
-          onClick={handleItemClick}
-          data-id={""}
+          style={{
+            padding: "8px",
+            fontSize: "16px",
+            borderRadius: "4px",
+            border: checkedId == "" ? "1px solid blue" : "1px solid #ccc",
+            cursor: "pointer",
+            width: "300px",
+          }}
+          onClick={() => handleItemClick("")}
         >
           Все
         </div>
-        {flattedCategories?.map((category: any) => {
-          return (
-            <div
-              className={`categories-filter__item ${
-                category.id === checkedId ? "active" : ""
-              }`}
-              onClick={handleItemClick}
-              key={category.id}
-              data-id={category.id}
-            >
-              {category.name}
-            </div>
-          );
-        })}
+
+        {categoriesState?.map((cat, index) => (
+          <Dropdown
+            key={index}
+            placeholder={cat?.name}
+            options={[{ id: cat?.id, name: cat?.name }, ...cat?.subCategories]}
+            onSelect={(e: any) => handleItemClick(e?.id)}
+            isActive={checkedId}
+          />
+        ))}
+
         <a
           className={`categories-filter__item ${!checkedId ? "active" : ""}`}
           // onClick={handleDownloadCategory}

@@ -118,9 +118,9 @@ export const Products: React.FC = (): JSX.Element => {
           )}
           <Pagination
             className="products__pagination mt-2"
-            page={Number(params?.page || 1)}
+            page={Number(params?.pageNumber || 1)}
             totalPages={pageCount}
-            onPageChange={(p: number) => handleSetParams("page", p)}
+            onPageChange={(p: number) => handleSetParams("pageNumber", p)}
           />
         </div>
       </MainLayout>

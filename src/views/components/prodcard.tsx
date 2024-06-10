@@ -5,7 +5,7 @@ import { BaseUrl, BaseUrlWithoutApi } from "@utils/BaseUrl";
 import { Switch } from "./Switch";
 import axios from "axios";
 
-interface IProps extends IProductCard {}
+interface IProps extends IProductCard { }
 
 export const Prodcard: React.FC<IProps> = (props): JSX.Element => {
   return (
@@ -21,7 +21,7 @@ export const Prodcard: React.FC<IProps> = (props): JSX.Element => {
 
       <div className="prodcard__info">
         <div className="prodcard__title">
-          <h3 className="prodcard__name">{props.name}</h3>
+          <h3 className="prodcard__name">{props?.name?.length > 40 ? props.name?.substring(0, 40) + '...' : props?.name}</h3>
           <div className="prodcard__subtitle">
             {props.isNew && <p className="prodcard__is-new">новинка</p>}
             {props.discount !== "0" && (

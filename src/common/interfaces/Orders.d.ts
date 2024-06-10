@@ -23,7 +23,7 @@ export interface IOrder {
 }
 
 export interface IOrdersParams {
-  page?: number;
+  pageNumber?: number;
 }
 
 export interface IOrderState {
