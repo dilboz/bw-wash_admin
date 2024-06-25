@@ -14,36 +14,36 @@ interface IProps {
 
 const Categories: React.FC<IProps> = (props): JSX.Element => {
   const [updateShowIndex, setUpdateShowIndex] = useState<
-    { id: number; categoryId: string }[]
+    { show_index: number; category_id: string }[]
   >([]);
 
   const [list, setList] = useState(props.list);
 
   const handleSave = async () => {
-    for (let i = 0; i <= updateShowIndex?.length - 1; i++) {
-      await fetch(
-        BaseUrl +
-          "/categories/" +
-          updateShowIndex[i]?.categoryId +
-          "/showindex/" +
-          updateShowIndex[i]?.id,
-        { method: "PATCH" }
-      ).then((res) => res.status);
-    }
+    await fetch(BaseUrl + "/categories/show-index", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateShowIndex),
+    })
 
     window.location.reload();
   };
 
   return (
     <div className="categories">
-      {list?.map((category: any, index) => {
+      {list?.map((category: any) => {
         return (
           <div key={category.id} className="category-box" draggable>
             <select
               onChange={(e) =>
                 setUpdateShowIndex((prev: any) => [
                   ...prev,
-                  { id: Number(e.target.value), categoryId: category?.id },
+                  {
+                    show_index: Number(e.target.value),
+                    category_id: category?.id,
+                  },
                 ])
               }
               key={category?.name}
