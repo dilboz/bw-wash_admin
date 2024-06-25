@@ -2,6 +2,7 @@ export interface ICategories {
   id: string | null;
   name: string;
   isActive?: boolean
+  showIndex?: number
 }
 
 export interface ICategoriesAll extends ICategories {
