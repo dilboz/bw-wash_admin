@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DropdownMenu, Page, SubSubcategoriesMenu } from "@components";
 import { MainLayout } from "@layouts";
 import { ISelectedCharacteristic } from "@interfaces";
@@ -10,7 +10,7 @@ import {
   characteristicControllers,
   productControllers,
 } from "@controllers";
-import { DeleteIcon } from "@icons";
+import { DeleteIcon, LinkIcon } from "@icons";
 import { addProductValidation } from "@validations";
 import classNames from "classnames";
 
@@ -25,6 +25,7 @@ export const AddProduct: React.FC = (): JSX.Element => {
   const { pending } = useAppSelector((state) => state.product);
   const categories = useAppSelector((state) => state.category);
   const brands = useAppSelector((state) => state.brand);
+  const [imageCount, setImageCount] = useState(5);
 
   const [errorText, setErrorText] = React.useState<string | null>("");
   const [name, setName] = React.useState<string>("");
@@ -64,7 +65,7 @@ export const AddProduct: React.FC = (): JSX.Element => {
     formData.append("BrandId", brand?.id || "");
     formData.append("MainImage", mainImage || "");
     imageList.forEach((image) => {
-      formData.append("Images", image.file || "");
+      formData.append("Images", image.file == undefined ? "" : image?.file);
     });
     characteristicsValues
       .filter((item) => item.characteristic.id !== "" && item.value.id !== "")
@@ -92,28 +93,32 @@ export const AddProduct: React.FC = (): JSX.Element => {
     setMainImage(files[0]);
   }, []);
 
-  const handleAddImage = React.useCallback((files: FileList | null) => {
+  const handleAddImage = (files: FileList | null, index: number) => {
     if (!files) return;
-    setImageList((prev) => [
-      ...prev,
-      { file: files[0], id: String(new Date().valueOf()) },
-    ]);
-  }, []);
+    const newArray: any = [...imageList];
 
-  const handleRemoveImage = React.useCallback((id: string) => {
-    setImageList((prev) => prev.filter((item) => item.id !== id));
-  }, []);
+    newArray[index] = { file: files[0], id: String(new Date().valueOf()) };
+
+    setImageList(newArray);
+  };
+
+  const handleRemoveImage = (index: number) => {
+    let allImages: any = [...imageList];
+    allImages[index] = undefined;
+
+    setImageList(allImages);
+  };
 
   React.useEffect(() => {
     dispatch(categoryControllers.get());
   }, [dispatch]);
 
   React.useEffect(() => {
-    dispatch(brandControllers.get())
+    dispatch(brandControllers.get());
   }, [dispatch]);
 
   React.useEffect(() => {
-    dispatch(characteristicControllers.getWithValues())
+    dispatch(characteristicControllers.getWithValues());
   }, [dispatch]);
 
   return (
@@ -163,36 +168,84 @@ export const AddProduct: React.FC = (): JSX.Element => {
             <div className="form__label-name">Дополнительные фотографии</div>
 
             <div className="d-flex gap-20 mt-1 mb-1 flex-wrap">
-              {imageList.map((item) => (
-                <div className="banner__container mt-1" key={item.id}>
-                  <div className="banner__image ">
-                    <img
-                      className="img product-images"
-                      src={URL.createObjectURL(item.file)}
-                      alt="Выбранное изображение"
-                    />
-                  </div>
-                  <div className="banner__tools">
-                    <button
-                      className="banner__btn banner__delete-btn"
-                      onClick={() => handleRemoveImage(item.id)}
+              {Array.from({ length: imageCount }, (_, index: number) => (
+                <div
+                  key={index}
+                  style={{
+                    border: "1px solid #e5e5e5",
+                    padding: "2px",
+                    height: "100px",
+                    width: "100px",
+                    borderRadius: "10px",
+                    color: "#d5d5d5",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    position: "relative",
+                  }}
+                  onClick={() =>
+                    document.getElementById("input-file-" + index)?.click()
+                  }
+                >
+                  {imageList[index]?.file === undefined && (
+                    <LinkIcon size={24} />
+                  )}
+                  {imageList[index]?.file !== undefined && (
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRemoveImage(index);
+                      }}
+                      style={{
+                        background: "white",
+                        position: "absolute",
+                        color: "red",
+                        top: "-5px",
+                        right: "-10px",
+                        cursor: "pointer",
+                        padding: "5px",
+                        borderRadius: "100%",
+                        border: "1px solid #e5e5e5",
+                      }}
                     >
                       <DeleteIcon size={24} />
-                    </button>
-                  </div>
+                    </div>
+                  )}
+                  {imageList[index]?.file !== undefined && (
+                    <img
+                      src={URL.createObjectURL(imageList[index]?.file)}
+                      alt=""
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  )}
+                  <input
+                    id={"input-file-" + index}
+                    type="file"
+                    style={{ display: "none" }}
+                    onChange={(e) => handleAddImage(e.target.files, index)}
+                  />
                 </div>
               ))}
+              <div
+                style={{
+                  border: "1px solid #e5e5e5",
+                  padding: "2px",
+                  height: "100px",
+                  width: "100px",
+                  borderRadius: "10px",
+                  color: "#d5d5d5",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "relative",
+                  fontSize: "30px",
+                  cursor: "pointer",
+                }}
+                onClick={() => setImageCount((prev: number) => prev + 1)}
+              >
+                +
+              </div>
             </div>
-
-            <label className="add-btn add-btn_sm">
-              <input
-                id="inputfile"
-                className="d-none"
-                type="file"
-                onChange={(e) => handleAddImage(e.target.files)}
-              />
-              Добавить фотографию
-            </label>
           </div>
 
           <div className="form__label">
@@ -221,12 +274,11 @@ export const AddProduct: React.FC = (): JSX.Element => {
                 type="text"
                 value={price}
                 onFocus={(e) => {
-                  e.target.select()
+                  e.target.select();
                 }}
                 onChange={(e) => {
                   let value = e.target.value;
-                  if (!isNaN(Number(value)))
-                    setPrice(e.target.value);
+                  if (!isNaN(Number(value))) setPrice(e.target.value);
                 }}
               />
               <div className="form__label-input-type">c.</div>
@@ -242,10 +294,9 @@ export const AddProduct: React.FC = (): JSX.Element => {
                 value={discount}
                 onFocus={(e) => e.target.select()}
                 onChange={(e) => {
-                  let value = e.target.value.replace(',', '');
-                  if (value.indexOf(',') !== -1) return;
-                  if (!isNaN(Number(value)))
-                    setDiscount(e.target.value);
+                  let value = e.target.value.replace(",", "");
+                  if (value.indexOf(",") !== -1) return;
+                  if (!isNaN(Number(value))) setDiscount(e.target.value);
                 }}
               />
               <div className="form__label-input-type">%</div>
