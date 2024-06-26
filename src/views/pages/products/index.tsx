@@ -103,7 +103,7 @@ export const Products: React.FC = (): JSX.Element => {
                     id={item.id}
                     isNew={item.isNew}
                     discount={item.discount}
-                    imgSrc={item.images && item.images[0]}
+                    imgSrc={item.mainImagePath}
                     name={item.name}
                     price={item.price}
                     isHidden={item.hideProduct}

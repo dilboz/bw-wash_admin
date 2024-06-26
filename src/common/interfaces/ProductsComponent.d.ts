@@ -14,6 +14,7 @@ export interface IProduct {
   vendorCode: string;
   brandId: string;
   productDate: string;
+  mainImagePath: string;
   characteristics: ICharacteristicResponse[];
   images: {
     id: string;
