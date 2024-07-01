@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DropdownMenu, Page, SubSubcategoriesMenu } from "@components";
 import { MainLayout } from "@layouts";
-import { ISelectedCharacteristic } from "@interfaces";
+import { ICategory, ISelectedCharacteristic } from "@interfaces";
 import { useAppDispatch, useAppSelector } from "@store";
 import { CharacteristicsDropdown } from "@components";
 import {
@@ -327,7 +327,7 @@ export const AddProduct: React.FC = (): JSX.Element => {
               id="categoryId"
               selectedId={categoryId}
               onSelect={(id) => setCategoryId(id)}
-              list={categories.data}
+              list={(categories?.data as any)?.toReversed()}
             />
           </div>
 

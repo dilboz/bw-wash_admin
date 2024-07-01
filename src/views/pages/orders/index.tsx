@@ -8,7 +8,9 @@ import { IOrder, IOrdersParams } from "@interfaces";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import { AppPaths } from "@constants";
+import { LSTokenName } from "@utils/LocaStorage";
 import { QueryToObject, QueryToString } from "@functions";
+import { BaseUrl } from "@utils/BaseUrl";
 
 const initialParams: IOrdersParams = {
   pageNumber: 1,
@@ -55,9 +57,29 @@ export const Orders: React.FC = (): JSX.Element => {
     });
   }, []);
 
+  const handleDelete = () => {
+    const token: string | null = localStorage.getItem(LSTokenName) || null;
+    fetch(BaseUrl + "/basket/clear", {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token?.slice(1, -1)}`,
+      },
+    }).then(() => {
+      window.location.reload()
+    });
+  };
+
   return (
     <Page title="Список заказов">
       <MainLayout>
+        <div className="products">
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h1 className="title">Продукты</h1>
+            <button onClick={handleDelete} className="button button-primary">
+              Очистить историю заказов
+            </button>
+          </div>
+        </div>
         <div className="deliveryType">
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h1 className="title">Заказы</h1>
@@ -65,22 +87,12 @@ export const Orders: React.FC = (): JSX.Element => {
           <div className="myTable">
             {pending && <DeliveryTypesSkeleton />}
             <div className="myTableRowHead">
-              <div className='myTableRow__grid'>
-                <div className="deliveryType__item-name">
-                  Номер телефона
-                </div>
-                <div className="deliveryType__item-name">
-                  Способ доставки
-                </div>
-                <div className="deliveryType__item-name">
-                  Способ оплаты
-                </div>
-                <div className="deliveryType__item-name">
-                  Дата
-                </div>
-                <div className="deliveryType__item-name">
-                  Сумма
-                </div>
+              <div className="myTableRow__grid">
+                <div className="deliveryType__item-name">Номер телефона</div>
+                <div className="deliveryType__item-name">Способ доставки</div>
+                <div className="deliveryType__item-name">Способ оплаты</div>
+                <div className="deliveryType__item-name">Дата</div>
+                <div className="deliveryType__item-name">Сумма</div>
               </div>
               <div className="tempDiv"></div>
             </div>
@@ -106,7 +118,13 @@ export const Orders: React.FC = (): JSX.Element => {
                       {new Date(item.orderAt).toLocaleDateString()}
                     </div>
                     <div className="deliveryType__item-name">
-                      {item.type.reduce((acc, cur) => acc + (cur.price - (cur.price / 100 * cur.discount)) * cur.count, 0)}
+                      {item.type.reduce(
+                        (acc, cur) =>
+                          acc +
+                          (cur.price - (cur.price / 100) * cur.discount) *
+                            cur.count,
+                        0
+                      )}
                     </div>
                   </Link>
                   <div className="deliveryType__item-tools">
@@ -114,19 +132,29 @@ export const Orders: React.FC = (): JSX.Element => {
                       onClick={() => handleApprove(item)}
                       className={classNames(
                         "deliveryType__item-success deliveryType__item-staticBtn",
-                        (item.orderStatusId === "Одобрено" || item.orderStatusId === 2) && "deliveryType__item-success__disabled"
+                        (item.orderStatusId === "Одобрено" ||
+                          item.orderStatusId === 2) &&
+                          "deliveryType__item-success__disabled"
                       )}
                     >
-                      {(item.orderStatusId === "Одобрено" || item.orderStatusId === 2) ? "Одобрено" : "Одобрить"}
+                      {item.orderStatusId === "Одобрено" ||
+                      item.orderStatusId === 2
+                        ? "Одобрено"
+                        : "Одобрить"}
                     </button>
                     <button
                       onClick={() => handleReject(item)}
                       className={classNames(
                         "deliveryType__item-delete deliveryType__item-staticBtn",
-                        (item.orderStatusId === "Отказано" || item.orderStatusId === 3) && "deliveryType__item-delete__disabled"
+                        (item.orderStatusId === "Отказано" ||
+                          item.orderStatusId === 3) &&
+                          "deliveryType__item-delete__disabled"
                       )}
                     >
-                      {(item.orderStatusId === "Отказано" || item.orderStatusId === 3) ? "Отказано" : "Отказать"}
+                      {item.orderStatusId === "Отказано" ||
+                      item.orderStatusId === 3
+                        ? "Отказано"
+                        : "Отказать"}
                     </button>
                   </div>
                 </div>

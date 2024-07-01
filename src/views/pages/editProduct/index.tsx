@@ -471,7 +471,7 @@ export const EditProduct: React.FC = (): JSX.Element => {
               id="categoryId"
               selectedId={categoryId}
               onSelect={(id) => setCategoryId(id)}
-              list={categories.data}
+              list={(categories?.data as any)?.toReversed()}
             />
           </div>
 
