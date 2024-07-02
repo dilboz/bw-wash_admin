@@ -59,7 +59,7 @@ export const Orders: React.FC = (): JSX.Element => {
 
   const handleDelete = () => {
     const token: string | null = localStorage.getItem(LSTokenName) || null;
-    fetch(BaseUrl + "/basket/clear", {
+    fetch(BaseUrl + "/order/clear", {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token?.slice(1, -1)}`,
