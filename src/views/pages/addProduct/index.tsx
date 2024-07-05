@@ -327,7 +327,7 @@ export const AddProduct: React.FC = (): JSX.Element => {
               id="categoryId"
               selectedId={categoryId}
               onSelect={(id) => setCategoryId(id)}
-              list={(categories?.data as any)?.toReversed()}
+              list={(categories?.data as any)?.toReversed()?.sort((a: any, b: any) => a.showIndex - b.showIndex)}
             />
           </div>
 

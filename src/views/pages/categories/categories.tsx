@@ -33,7 +33,7 @@ const Categories: React.FC<IProps> = (props): JSX.Element => {
 
   return (
     <div className="categories">
-      {(list as any)?.toReversed()?.map((category: any) => {
+      {(list as any)?.sort((a: any,b: any) => a.showIndex - b.showIndex)?.map((category: any) => {
         return (
           <div key={category.id} className="category-box" draggable>
             <select
